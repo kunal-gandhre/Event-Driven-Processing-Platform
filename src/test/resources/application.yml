@@ -3,3 +3,9 @@ spring:
   kafka.bootstrap-servers: unused:9092
   flyway.enabled: true
 platform.messaging.provider: test
+
+# Enable standard Elastic Common Schema (ECS) JSON logs
+logging.structured.format.console: ecs
+
+# Optional: Add your service name to the JSON metadata
+spring.application.name: order-saga-service

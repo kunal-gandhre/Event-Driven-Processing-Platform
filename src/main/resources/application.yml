@@ -1,25 +1,26 @@
 spring:
-  application.name: event-driven-processing-platform
-  datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/events}
-    username: ${DATABASE_USERNAME:events}
-    password: ${DATABASE_PASSWORD:events}
-  jpa.hibernate.ddl-auto: validate
-  flyway.enabled: true
-  kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
-    consumer.properties.spring.json.trusted.packages: com.gandhre.demo.platform.event
-    producer.value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    consumer.value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    application.name: event-driven-processing-platform
+    datasource:
+        url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/events}
+        username: ${DATABASE_USERNAME:events}
+        password: ${DATABASE_PASSWORD:events}
+    jpa.hibernate.ddl-auto: validate
+    flyway.enabled: true
+    kafka:
+        bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+        consumer.properties.spring.json.trusted.packages: com.gandhre.demo.platform.event
+        producer.value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+        consumer.value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 management.endpoints.web.exposure.include: health,info,metrics
 platform:
-  messaging.provider: ${MESSAGING_PROVIDER:kafka} # kafka or sqs
-  aws.region: ${AWS_REGION:eu-west-1}
-  aws.endpoint: ${AWS_ENDPOINT:}
-  sqs.queue-url: ${SQS_QUEUE_URL:}
-  sns.topic-arn: ${SNS_TOPIC_ARN:}
-  object-store:
-    endpoint: ${OBJECT_STORE_ENDPOINT:http://localhost:9000}
-    bucket: ${OBJECT_STORE_BUCKET:event-payloads}
-    access-key: ${OBJECT_STORE_ACCESS_KEY:minioadmin}
-    secret-key: ${OBJECT_STORE_SECRET_KEY:minioadmin}
+    messaging.provider: ${MESSAGING_PROVIDER:kafka} # kafka or sqs
+    aws.region: ${AWS_REGION:eu-west-1}
+    aws.endpoint: ${AWS_ENDPOINT:}
+    sqs.queue-url: ${SQS_QUEUE_URL:}
+    sns.topic-arn: ${SNS_TOPIC_ARN:}
+    object-store:
+        endpoint: ${OBJECT_STORE_ENDPOINT:http://localhost:9000}
+        bucket: ${OBJECT_STORE_BUCKET:event-payloads}
+        access-key: ${OBJECT_STORE_ACCESS_KEY:minioadmin}
+        secret-key: ${OBJECT_STORE_SECRET_KEY:minioadmin}
+

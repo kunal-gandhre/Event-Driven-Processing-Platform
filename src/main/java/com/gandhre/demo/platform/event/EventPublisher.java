@@ -1,1 +1,3 @@
-package com.gandhre.demo.platform.event;public interface EventPublisher { void publish(ProcessingEvent event); }
+package com.gandhre.demo.platform.event;
+
+public interface EventPublisher { void publish(ProcessingEvent event); }

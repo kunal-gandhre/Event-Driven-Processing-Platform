@@ -1,1 +1,42 @@
-package com.gandhre.demo.platform.messaging;import com.gandhre.demo.platform.event.*;import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;import org.springframework.context.annotation.Configuration;import org.springframework.kafka.annotation.KafkaListener;import org.springframework.kafka.core.KafkaTemplate;import org.springframework.stereotype.Component;@Configuration@ConditionalOnProperty(name = "platform.messaging.provider", havingValue = "kafka", matchIfMissing = true)public class KafkaMessagingConfiguration {}@Component@ConditionalOnProperty(name = "platform.messaging.provider", havingValue = "kafka", matchIfMissing = true)class KafkaEventPublisher implements EventPublisher {	private final KafkaTemplate<String, ProcessingEvent> kafka;	KafkaEventPublisher(KafkaTemplate<String, ProcessingEvent> kafka) {		this.kafka = kafka;	}	public void publish(ProcessingEvent event) {		kafka.send("processing.events", event.aggregateId(), event);	}}@Component@ConditionalOnProperty(name = "platform.messaging.provider", havingValue = "kafka", matchIfMissing = true)class KafkaEventConsumer {	private final EventProcessor processor;	KafkaEventConsumer(EventProcessor processor) {		this.processor = processor;	}	@KafkaListener(topics = "processing.events", groupId = "event-processor")	void consume(ProcessingEvent event) {		processor.process(event);	}}
+package com.gandhre.demo.platform.messaging;
+
+import com.gandhre.demo.platform.event.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
+
+@Configuration
+@ConditionalOnProperty(name = "platform.messaging.provider", havingValue = "kafka", matchIfMissing = true)
+public class KafkaMessagingConfiguration {
+}
+
+@Component
+@ConditionalOnProperty(name = "platform.messaging.provider", havingValue = "kafka", matchIfMissing = true)
+class KafkaEventPublisher implements EventPublisher {
+	private final KafkaTemplate<String, ProcessingEvent> kafka;
+
+	KafkaEventPublisher(KafkaTemplate<String, ProcessingEvent> kafka) {
+		this.kafka = kafka;
+	}
+
+	public void publish(ProcessingEvent event) {
+		kafka.send("processing.events", event.getAggregateId(), event);
+	}
+}
+
+@Component
+@ConditionalOnProperty(name = "platform.messaging.provider", havingValue = "kafka", matchIfMissing = true)
+class KafkaEventConsumer {
+	private final EventProcessor processor;
+
+	KafkaEventConsumer(EventProcessor processor) {
+		this.processor = processor;
+	}
+
+	@KafkaListener(topics = "processing.events", groupId = "event-processor")
+	void consume(ProcessingEvent event) {
+		processor.process(event);
+	}
+}
