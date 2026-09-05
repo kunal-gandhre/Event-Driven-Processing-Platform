@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven 'M3' // Must match the exact name you configured in Tools
+    }
 
     options {
         timestamps()
@@ -14,7 +17,7 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                sh 'mvn --batch-mode clean compile'
+                sh 'mvn --batch-mode clean compile install'
             }
         }
 
