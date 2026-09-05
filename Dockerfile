@@ -1,0 +1,1 @@
+FROM eclipse-temurin:25-jreWORKDIR /appCOPY target/event-driven-processing-platform-0.0.1-SNAPSHOT.jar app.jarEXPOSE 8080ENTRYPOINT ["java","-jar","/app/app.jar"]

@@ -1,0 +1,1 @@
+package com.gandhre.demo.platform.event;import java.time.Instant;import java.util.UUID;public record ProcessingEvent(UUID eventId, String eventType, String aggregateId, String payload, Instant occurredAt) {}

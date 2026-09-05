@@ -1,0 +1,1 @@
+apiVersion: v1kind: Servicemetadata: { name: event-platform, namespace: event-platform }spec: { selector: { app: event-platform }, ports: [{ port: 8080, targetPort: 8080 }] }

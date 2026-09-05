@@ -1,0 +1,1 @@
+package com.gandhre.demo.platform.event;import jakarta.validation.constraints.NotBlank;public record CreateEventRequest(@NotBlank String eventType, @NotBlank String aggregateId, @NotBlank String payload) {}

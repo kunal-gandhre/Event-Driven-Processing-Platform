@@ -1,0 +1,1 @@
+apiVersion: v1kind: ConfigMapmetadata: { name: event-platform-config, namespace: event-platform }data:  MESSAGING_PROVIDER: kafka  KAFKA_BOOTSTRAP_SERVERS: kafka:9092  OBJECT_STORE_ENDPOINT: http://minio:9000
