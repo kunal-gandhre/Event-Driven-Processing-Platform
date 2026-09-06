@@ -1,5 +1,6 @@
 package com.gandhre.demo.platform.event;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -10,8 +11,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ProcessingEvent {
+public class ProcessingEvent implements Serializable {
 
+	private static final long serialVersionUID = 138740341675373266L;
+	
 	UUID eventId;
 	String eventType;
 	String aggregateId;
@@ -25,6 +28,10 @@ public class ProcessingEvent {
 		this.aggregateId = aggregateId;
 		this.payload = payload;
 		this.occurredAt = occurredAt;
+	}
+
+	public ProcessingEvent() {
+		super();
 	}
 
 	public UUID getEventId() {
